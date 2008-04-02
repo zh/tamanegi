@@ -1,0 +1,10 @@
+tmp/
+*.orig
+*.rej
+*~
+*.o
+*.log
+*.mo
+*.pot
+db/*.db
+getall.rb

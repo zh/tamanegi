@@ -1,0 +1,60 @@
+Tamanegi -- RSS/Atom feeds aggregator powered by Ramaze
+========================================================
+
+The project previous name was RaPlanet. But there is another project with
+the same name, so I changed the name to Tamanegi (onion in japanese).
+Maybe somebody will remember the Matz' presentation on Rubykaigi 2006
+"The state of the onion" :) Tamanegi also trying to observe the state of
+the net and aggregate atom/rss feeds in one news stream.
+
+Live demo of the application can be seen on URL: http://planet.zhekov.net/
+
+
+Application details
+--------------------
+
+ * ORM (model): Sequel (_core and _model)
+ * Controllers: Ramaze (hm, maybe plain Rack will be also enough?)
+ * Views:       Ezamar (TODO: switch to Tenjin)
+
+
+Prerequirements (needed gems)
+-----------------------------
+
+ * sqlite3-ruby (database)
+ * validatable (models validation checks)
+ * feed-normalizer (feeds parsing)
+ * rss-client (feeds fetching)
+ * json (still not used)
+ * builder (feeds)
+ * thin (optional, deployment, can be mongrel, webrick etc.)
+
+
+Usage
+------
+
+[!] Change the settings in the app.rb file - base_url, items per page etc.
+
+ * "Development" mode
+
+$ cd tamanegi
+$ ./start.rb
+
+This will create the needed tables in the DB (sqlite3: db/tamanegi.db)
+"on the fly". By default the thin server is started, but you can change it 
+inside start.rb.
+
+ * "Production" mode
+
+On my site I have nginx talking to two thin instances via sockets:
+
+$ cd tamanegi
+$ mkdir -p log
+$ thin start --servers 2 --socket /tmp/negi.sock -r ramaze.ru
+
+And inside nginx.conf:
+
+ upstream play {
+      server unix:/tmp/negi.0.sock;
+      server unix:/tmp/negi.1.sock;
+ }
