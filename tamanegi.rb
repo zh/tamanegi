@@ -1,10 +1,14 @@
 #!/usr/bin/env ruby
 
+# OS X speedup
+require 'resolv-replace'
+
 require 'rubygems'
 require 'ostruct'
 require 'sequel'
 require 'validatable'
 require 'rss-client'
+require 'ramaze'
 
 DB_FILE = File.join(File.dirname(__FILE__),"db","tamanegi.db")
 DB = Sequel("sqlite:///#{DB_FILE}")
@@ -15,7 +19,7 @@ Kernel.load 'app.rb'
 
 # require all controllers and models
 acquire __DIR__/:model/'*'
-#acquire __DIR__/:controller/'*'
+acquire __DIR__/:controller/'*'
 
 module Tamanegi
   def self.sync!(forceUpdate = false, debug = false)
