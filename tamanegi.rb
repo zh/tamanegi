@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'ramaze'
 require 'ostruct'
 require 'sequel'
 require 'validatable'
@@ -30,5 +29,5 @@ end
 Tamanegi::sync!(true) if Item.empty? && Configuration.for('app').bootstrap 
 
 if __FILE__ == $0
-Tamanegi::sync!(false,true)
+  Tamanegi::sync!(false,true)
 end
