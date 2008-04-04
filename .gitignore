@@ -1,4 +1,6 @@
 tmp
+html
+public/bugs
 *.orig
 *.rej
 *~
@@ -6,5 +8,6 @@ tmp
 *.log
 *.mo
 *.pot
+*.swp
 db/*.db
 getall.rb
