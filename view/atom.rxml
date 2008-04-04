@@ -10,7 +10,7 @@ xml.feed :xmlns=>'http://www.w3.org/2005/Atom' do
     xml.entry do
       xml.title   i.title
       xml.link    :rel=>"alternate", :href=>i.link, :type=>"text/html"
-      xml.id      "#{Configuration.for('app').base_url}/#{i.id}"
+      xml.id      "#{Configuration.for('app').base_url}/show/#{i.id}"
       xml.published i.created.iso8601
       xml.updated i.created.iso8601
       xml.content(:type=>"html") do
