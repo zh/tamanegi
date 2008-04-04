@@ -33,7 +33,7 @@ Prerequirements (needed gems)
 Usage
 ------
 
-[!] Change the settings in the app.rb file - base_url, items per page etc.
+[!] Change the settings in the config.rb file - base_url, items per page etc.
 
  * Command line usage
 
@@ -41,6 +41,7 @@ You can use Tamanegi just to fill your database with items and display them with
 something else (Ruby on Rails etc.). So from irb or a script
 
  require 'tamanegi'
+ Tamanegi::sync!(false,true)
 
  * "Development" mode
 
