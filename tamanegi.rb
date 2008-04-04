@@ -11,15 +11,41 @@ require 'rss-client'
 require 'ramaze'
 
 DB_FILE = File.join(File.dirname(__FILE__),"db","tamanegi.db")
-DB = Sequel("sqlite:///#{DB_FILE}")
-Sequel.single_threaded = true
+DB = Sequel("sqlite:///#{DB_FILE}", :single_threaded => true)
 
 acquire __DIR__/:lib/'*'
-Kernel.load 'app.rb'
+Kernel.load 'config.rb'
 
 # require all controllers and models
 acquire __DIR__/:model/'*'
 acquire __DIR__/:controller/'*'
+
+module Ramaze
+  class Pager
+    def navigation
+      url=Request.current.env['PATH_INFO']
+      nav = ""
+      unless first_page?
+        nav << %{
+<a href="#{url}?_page=#{prev_page}">&lt;Prev</a>
+        }
+      end
+      for i in nav_range()
+        if i == @page
+          nav << %{<span class="active">#{i}</span>&nbsp;}
+        else
+          nav << %{<a href="#{url}?_page=#{i}">#{i}</a>&nbsp;}
+        end
+      end
+      unless last_page?
+        nav << %{
+ <a href="#{url}?_page=#{next_page}">Next&gt;</a>
+        }
+      end
+      return nav
+    end
+  end
+end
 
 module Tamanegi
   def self.sync!(forceUpdate = false, debug = false)

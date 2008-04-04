@@ -1,0 +1,15 @@
+<?r unless logged_in? ?>
+<?r   if flash[:error] ?>
+<p class="error">
+#{flash[:error]}
+</p>
+<?r   end ?>
+<form method="post" action="#{Rs(:login)}">
+   <label><b>Username: </b></label><input name="username" type="text" value=""/><br/>
+   <label><b>Password: </b></label><input name="password" type="password" value=""/><br/>
+   <input type="submit" value="Login"/>  or
+   <a href="#{Rs()}">cancel</a>
+</form>
+<?r else ?>
+click here to <a href="#{Rs(:logout)}">logout</a>
+<?r end ?>

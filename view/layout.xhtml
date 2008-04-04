@@ -1,0 +1,22 @@
+<?r @page_title = @title ? @title : Configuration.for('app').title ?>
+<html>
+  <head>
+    <link href="#{Configuration.for('app').base_url}/atom" rel="alternate" type="application/atom+xml" />
+    <title>#{@page_title}</title>
+    <link href='/css/style.css' rel='stylesheet' type='text/css' />
+  </head>
+  <body>
+    <div id="header"><h1>#{@page_title}</h1></div>
+    <hr/>
+    <div id="right">
+       <b>Feeds</b><br/>
+       <?r Feed.order(:synced.DESC).all.each do |f|  ?>
+          <img border="0" src="#{f.link}/favicon.ico" width="16" height="16" />
+          <a href="/feed/show/#{f.id}">#{f.handle}</a><br/>
+       <?r end ?>
+    </div>
+    <div id="center">#@content</div>
+    <hr/>
+    <div id="footer">Powered by <a href="http://github.com/zh/tamanegi/tree/master/">Tamanegi</a></div>
+  </body>
+</html>

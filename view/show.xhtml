@@ -1,0 +1,24 @@
+<div class="hentry">
+<h3 class="entry-title">#{@item.title}</h3>
+<b>original:</b> <a href="#{@item.link}">#{@item.title}</a><br/>
+<b>site:</b> <a href="#{@item.feed.url}">#{@item.feed.handle}</a><br/>
+<b>created:</b> 
+<abbr class="updated" title="#{@item.created.iso8601}">#{@item.created.to_formatted_s(:short)}</abbr>
+<br/>
+<br/>
+<div class="entry-content">#{@item.description}</div>
+</div>
+<br/><br/>
+<a href="/">News</a>
+<script language='JavaScript'>
+  var OutbrainPermaLink='#{@item.link}';
+  var OB_demoMode = false;
+  var OB_langJS ='http://widgets.outbrain.com/lang_en.js';
+  if ( typeof(OB_Script)!='undefined' )
+    OutbrainStart();
+  else {
+    var OB_Script = true;
+    var str = '<script src="http://widgets.outbrain.com/OutbrainRater.js" type="text/javascript" />';
+    document.write(str);
+  }
+</script>

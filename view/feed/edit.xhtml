@@ -1,0 +1,9 @@
+<form method="post" action="#{Rs(:update)}">
+   <input name="id" type="hidden" value="#{@feed.id}"/>
+   <label><b>Handle: </b></label><input name="handle" type="text" value="#{@feed.handle}"/><br/>
+   <label><b>URL: </b></label><input name="url" type="text" value="#{@feed.url}"/><br/>
+   <label><b>Title: </b></label><input name="title" type="text" value="#{@feed.title}"/><br/>
+   <label><b>Description: </b></label><input name="description" type="text" value="#{@feed.description}"/><br/>
+   <input type="submit" value="Update Feed"/> or
+   <a href="#{Rs()}">cancel</a>
+</form>
