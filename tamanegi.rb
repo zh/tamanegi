@@ -27,6 +27,7 @@ module Ramaze
       nav = ""
       unless first_page?
         nav << %{
++<a href="#{url}?_page=#{first_page}">&lt;&lt;First</a>
 <a href="#{url}?_page=#{prev_page}">&lt;Prev</a>
         }
       end
@@ -40,6 +41,7 @@ module Ramaze
       unless last_page?
         nav << %{
  <a href="#{url}?_page=#{next_page}">Next&gt;</a>
+ <a href="#{url}?_page=#{last_page}">Last&gt;&gt;</a>
         }
       end
       return nav

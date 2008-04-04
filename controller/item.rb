@@ -8,7 +8,7 @@ class ItemController < Ramaze::Controller
 
   # the index action is called automatically when no other action is specified
   def index
-    @title = "Aggregated news"
+    @title = "The state of the onion"
     @ids, @pager = paginate(Item.order(:id.DESC).map(:id), 
                             :limit => Configuration.for('app').one_page)
   end
