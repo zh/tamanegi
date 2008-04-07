@@ -8,46 +8,27 @@ require 'ostruct'
 require 'sequel'
 require 'validatable'
 require 'rss-client'
-require 'ramaze'
+
+$LOAD_PATH.unshift(File.dirname(__FILE__))
 
 DB_FILE = File.join(File.dirname(__FILE__),"db","tamanegi.db")
 DB = Sequel("sqlite:///#{DB_FILE}", :single_threaded => true)
 
-acquire __DIR__/:lib/'*'
-Kernel.load 'config.rb'
-
-# require all controllers and models
-acquire __DIR__/:model/'*'
-acquire __DIR__/:controller/'*'
-
-module Ramaze
-  class Pager
-    def navigation
-      url=Request.current.env['PATH_INFO']
-      nav = ""
-      unless first_page?
-        nav << %{
-<a href="#{url}?_page=#{first_page}">&lt;&lt;First</a>
-<a href="#{url}?_page=#{prev_page}">&lt;Prev</a>
-        }
+class Dir
+  def self.scan(directory)
+    self.entries(directory).each do |file|
+      if file =~ /\.rb/
+        require directory + file
       end
-      for i in nav_range()
-        if i == @page
-          nav << %{<span class="active">#{i}</span>&nbsp;}
-        else
-          nav << %{<a href="#{url}?_page=#{i}">#{i}</a>&nbsp;}
-        end
-      end
-      unless last_page?
-        nav << %{
- <a href="#{url}?_page=#{next_page}">Next&gt;</a>
- <a href="#{url}?_page=#{last_page}">Last&gt;&gt;</a>
-        }
-      end
-      return nav
     end
   end
 end
+
+Dir.scan("lib/")
+Kernel.load 'config.rb'
+
+# require all controllers and models
+Dir.scan("model/")
 
 module Tamanegi
   def self.sync!(forceUpdate = false, debug = false)

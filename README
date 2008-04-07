@@ -1,5 +1,5 @@
-Tamanegi -- RSS/Atom feeds aggregator powered by Ramaze
-========================================================
+Tamanegi -- RSS/Atom feeds aggregator
+=====================================
 
 The project previous name was RaPlanet. But there is another project with
 the same name, so I changed the name to Tamanegi (onion in japanese).
@@ -13,9 +13,9 @@ Live demo of the application can be seen on URL: http://planet.zhekov.net/
 Application details
 --------------------
 
+This is the command line only version of Tamanegi.
+
  * ORM (model): Sequel (_core and _model)
- * Controllers: Ramaze (hm, maybe plain Rack will be also enough?)
- * Views:       Ezamar (TODO: switch to Tenjin)
 
 
 Prerequirements (needed gems)
@@ -27,7 +27,6 @@ Prerequirements (needed gems)
  * rss-client (feeds fetching)
  * json (still not used)
  * builder (feeds)
- * thin (optional, deployment, can be mongrel, webrick etc.)
 
 
 Usage
@@ -43,26 +42,18 @@ something else (Ruby on Rails etc.). So from irb or a script
  require 'tamanegi'
  Tamanegi::sync!(false,true)
 
- * "Development" mode
+ * Adding new feeds:
 
-$ cd tamanegi
-$ ./start.rb
-
-This will create the needed tables in the DB (sqlite3: db/tamanegi.db)
-"on the fly". By default the thin server is started, but you can change it 
-inside start.rb.
-
- * "Production" mode
-
-On my site I have nginx talking to two thin instances via sockets:
-
-$ cd tamanegi
-$ mkdir -p log
-$ thin start --servers 2 --socket /tmp/negi.sock -r ramaze.ru
-
-And inside nginx.conf:
-
- upstream play {
-      server unix:/tmp/negi.0.sock;
-      server unix:/tmp/negi.1.sock;
- }
+ $ irb
+ > require 'tamanegi'
+ => true
+ > f = Feed.add('SomeHandler', 'http://www.example.com/feed.rss')
+ ...
+ > f.sync!
+ => 200
+ > f.save
+ ...
+ # print available feeds
+ > Feed.print(:handle,:url)
+ # sync all feeds
+ > Tamanegi::sync!(false,true)
