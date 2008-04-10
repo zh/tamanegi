@@ -1,5 +1,3 @@
-require 'rss-client'
-
 class Feed < Sequel::Model(:feeds)
 
   set_schema do
@@ -12,6 +10,7 @@ class Feed < Sequel::Model(:feeds)
     time      :created
     time      :updated
     time      :synced
+    varchar   :etag
     text      :description
     boolean   :always, :default => false
     index [:handle], :unique => true
@@ -21,7 +20,6 @@ class Feed < Sequel::Model(:feeds)
   one_to_many :items, :key => :feed_id
 
   include Validatable
-  include RSSClient
 
   validates do 
     presence_of :url, :handle
@@ -50,20 +48,26 @@ class Feed < Sequel::Model(:feeds)
   #
   # return status code
   # or nil on failure
-  # OPTIMIZE: the current code is too complicated, maybe use open-uri instead
   #
   def sync!(forceUpdate = false, giveup = Configuration.for('app').giveup)
-    opts = OpenStruct.new
-    opts.forceUpdate = forceUpdate
-    opts.giveup = giveup
-    opts.since = self.synced if self.synced
-
-    rss = get_feed(self.url, opts)
-    return nil unless @rssc_raw             # feed not fetched
-    set(:synced => Time.now, :status => @rssc_raw.status)
-    save if valid?                          # Save the status
-    return 304 if @rssc_raw.status == 304   # not modified
-    return nil unless rss                   # feed not parsed
+    begin
+      Timeout::timeout(giveup) do
+        @opts = {}
+        unless forceUpdate
+          @opts = @opts.merge({'If-Modified-Since' => self.synced.to_formatted_s(:rfc822)}) if self.synced
+          @opts = @opts.merge({'If-None-Match' => self.etag}) if self.etag
+        end
+        @data = open(self.url, @opts) 
+      end
+    rescue OpenURI::HTTPError
+      set(:synced => Time.now, :status => 304)
+      save if valid?
+      return 304
+    rescue
+      return nil
+    else
+      rss = FeedNormalizer::FeedNormalizer.parse(@data)
+    end 
 
     # set the title, description and link ONLY IF EMPTY
     set(:title => rss.channel.title.to_s) unless self.title
@@ -90,9 +94,33 @@ class Feed < Sequel::Model(:feeds)
         item.valid? ? item.save : rollback
       end
     end
+    set(:synced => Time.now, :status => @data.status[0].to_i, :etag => @data.meta['etag'])
     save if valid?
-    return @rssc_raw.status
+    return @data.status[0].to_i
   end
+
+private
+  def guid_for(rss_entry)
+    guid = rss_entry.urls.first
+    guid = rss_entry.id.to_s if rss_entry.id
+    return Digest::SHA1.hexdigest("--#{guid}--myBIGsecret")
+  end
+
+  def fix_content(content, site_link)
+    content = CGI.unescapeHTML(content) unless /</ =~ content
+    correct_urls(content, site_link)
+  end
+  
+  def correct_urls(text, site_link)
+    site_link += '/' unless site_link[-1..-1] == '/'
+    text.gsub(%r{(src|href)=(['"])(?!http)([^'"]*?)}) do
+      first_part = "#{$1}=#{$2}"
+      url = $3
+      url = url[1..-1] if url[0..0] == '/'
+      "#{first_part}#{site_link}#{url}"
+    end
+  end
+
 end
 
 Feed.create_table unless Feed.table_exists?

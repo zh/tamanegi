@@ -3,11 +3,13 @@
 # OS X speedup
 require 'resolv-replace'
 
+require 'timeout'
+require 'open-uri'
+
 require 'rubygems'
-require 'ostruct'
 require 'sequel'
 require 'validatable'
-require 'rss-client'
+require 'feed-normalizer'
 require 'ramaze'
 
 DB_FILE = File.join(File.dirname(__FILE__),"db","tamanegi.db")

@@ -5,5 +5,5 @@ Configuration.for('app') {
   one_page  10
   rss_page  20
   giveup    10
-  bootstrap false
+  bootstrap true
 }
