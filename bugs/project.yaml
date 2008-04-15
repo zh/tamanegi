@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/project 
+name: tamanegi
+version: "0.2"
+components: 
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: tamanegi
+releases: 
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: v0.0.7
+  status: :released
+  release_time: 2008-04-15 02:02:45.286404 Z
+  log_events: 
+  - - 2008-04-14 01:24:58.384949 Z
+    - Stoyan Zhekov <zh@zhware.net>
+    - created
+    - Fetching RSS feeds with open-uri, not with rss-client
+  - - 2008-04-15 02:02:45.286443 Z
+    - Stoyan Zhekov <zh@zhware.net>
+    - released
+    - Command-line version is ready to go.

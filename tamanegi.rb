@@ -4,10 +4,8 @@
 require 'resolv-replace'
 
 require 'rubygems'
-require 'ostruct'
-require 'sequel'
 require 'validatable'
-require 'rss-client'
+require 'sequel'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
