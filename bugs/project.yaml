@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/project 
+name: tamanegi
+version: "0.2"
+components: 
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: tamanegi
+releases: 
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: v0.0.7
+  status: :released
+  release_time: 2008-04-15 02:12:56.059373 Z
+  log_events: 
+  - - 2008-04-15 02:12:18.016977 Z
+    - Stoyan Zhekov <zh@zhware.net>
+    - created
+    - Switch to open-uri() for feed fetching.
+  - - 2008-04-15 02:12:56.059574 Z
+    - Stoyan Zhekov <zh@zhware.net>
+    - released
+    - bugs tracking by ditz-0.2 (bugs/ dir).

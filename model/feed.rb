@@ -1,3 +1,7 @@
+require 'timeout'
+require 'open-uri'
+require 'feed-normalizer'
+
 class Feed < Sequel::Model(:feeds)
 
   set_schema do
