@@ -1,3 +1,4 @@
+require 'timeout'
 require 'open-uri'
 require 'feed-normalizer'
 

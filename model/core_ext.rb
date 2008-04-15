@@ -1,9 +1,3 @@
-begin
-  require 'json/ext'
-rescue LoadError
-  require 'json/pure'
-end
-
 # shameless Rails copy-paste
 class Time#:nodoc:
 
@@ -16,17 +10,5 @@ class Time#:nodoc:
 
   def to_formatted_s(format = :default)
     DATE_FORMATS[format] ? strftime(DATE_FORMATS[format]).strip : to_s
-  end
-end
-
-module Sequel#:nodoc:
-  class Model
-    def to_json
-      self.values.to_json
-    end
-
-    def to_yaml
-      YAML.dump(self.values)
-    end
   end
 end

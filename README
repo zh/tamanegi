@@ -23,9 +23,8 @@ Prerequirements (needed gems)
 
  * sqlite3-ruby (database)
  * validatable (models validation checks)
+ * sequel (ORM)
  * feed-normalizer (feeds parsing)
- * rss-client (feeds fetching)
- * json (still not used)
  * builder (feeds)
 
 
