@@ -21,7 +21,7 @@ class Feed < Sequel::Model(:feeds)
     index [:synced]
   end 
 
-  one_to_many :items, :key => :feed_id
+  one_to_many :items, :key => :feed_id, :order => :id.DESC
 
   include Validatable
 
@@ -67,7 +67,11 @@ class Feed < Sequel::Model(:feeds)
       set(:synced => Time.now, :status => 304)
       save if valid?
       return 304
-    rescue
+    rescue Timeout::Error
+      Ramaze::Log.error "[E] #{self.url} timeout error"
+      return nil
+    rescue => e
+      Ramaze::Log.error "[E] #{e}"
       return nil
     else
       rss = FeedNormalizer::FeedNormalizer.parse(@data)

@@ -14,8 +14,8 @@ class ProcTitle
 end
 
 Ramaze.trait[:essentials].delete Ramaze::Adapter
-#Ramaze::Inform.loggers.first.log_levels = [:error, :info, :warn]
-Ramaze::Inform.loggers = []
+#Ramaze::Log.loggers.first.log_levels = [:error, :info, :warn]
+Ramaze::Log.loggers = []
 Ramaze::Global.sourcereload = nil
 use ProcTitle
 Ramaze.start :force => true, :load_engines => :Builder, :cache_alternative => {:sessions => Ramaze::MemcachedCache}

@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: sequel-1.4.0 have eager loading by default
+desc: "@feed.items from dataset become Array of Item objects"
+type: :bugfix
+component: tamanegi
+release: release-0.0.8
+reporter: Stoyan Zhekov <zh@zhware.net>
+status: :unstarted
+disposition: 
+creation_time: 2008-04-16 03:37:56.243652 Z
+references: []
+
+id: aca8ec0f8f5a04617e415dd0ff3965711510f5e3
+log_events: 
+- - 2008-04-16 03:39:10.362893 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - created
+  - |-
+    Put the ordering in the assocation definition.
+    Use map() to extract item ids for the pagination.

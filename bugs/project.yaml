@@ -18,3 +18,12 @@ releases:
     - Stoyan Zhekov <zh@zhware.net>
     - released
     - bugs tracking by ditz-0.2 (bugs/ dir).
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: release-0.0.8
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2008-04-16 03:35:45.037454 Z
+    - Stoyan Zhekov <zh@zhware.net>
+    - created
+    - Get ready for sequel-1.4 (eager loading)

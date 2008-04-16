@@ -16,8 +16,8 @@ class FeedController < Ramaze::Controller
   def show(id)
     @feed = feed_for(id)
     @title = 'Feeds, ' + @feed.handle
-   
-    @ids, @pager = paginate(@feed.items.order(:id.DESC).map(:id), 
+
+    @ids, @pager = paginate(@feed.items.map { |i| i.id },   
                             :limit => Configuration.for('app').one_page)
   end
 
