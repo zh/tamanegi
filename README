@@ -66,3 +66,18 @@ And inside nginx.conf:
       server unix:/tmp/negi.0.sock;
       server unix:/tmp/negi.1.sock;
  }
+
+
+Bugs tracking
+-------------
+
+ditz [ http://ditz.rubyforge.org/ ] distributed issue tracker is used. So the bug 
+reports/fixes come with the application distribution (directory bugs/). You can generate
+HTML pages for the current application status with:
+
+$ cd tamanegi
+$ rake ditz:html
+
+The commands above will create public/bugs dir and put all bugs related HTML pages there.
+Start the application (./start.rb or via ramaze.ru) and point your brouser to URL:
+http://{app.url}/bugs/ (see http://planet.zhekov.net/bugs/ for example output)

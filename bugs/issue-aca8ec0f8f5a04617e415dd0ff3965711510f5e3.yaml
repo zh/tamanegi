@@ -5,8 +5,8 @@ type: :bugfix
 component: tamanegi
 release: release-0.0.8
 reporter: Stoyan Zhekov <zh@zhware.net>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-04-16 03:37:56.243652 Z
 references: []
 
@@ -18,3 +18,7 @@ log_events:
   - |-
     Put the ordering in the assocation definition.
     Use map() to extract item ids for the pagination.
+- - 2008-04-16 05:33:14.222495 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - closed issue with disposition fixed
+  - Migration to sequel-1.4.0 successful.

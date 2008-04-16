@@ -53,6 +53,7 @@ module Tamanegi
       status = f.sync!(forceUpdate) 
       puts "#{Time.now.iso8601} #{f.url} [#{status}]" if (status && debug)
     }
+    Item.vacuum!
   end
 end
 

@@ -1,0 +1,5 @@
+== release-0.0.8 / unreleased
+* Show the version of the application in the footer
+* Remove old items from the database
+* bugfix: atom feed item links should point to the item show view
+* bugfix: sequel-1.4.0 have eager loading by default

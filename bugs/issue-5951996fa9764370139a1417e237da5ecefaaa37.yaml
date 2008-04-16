@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Show the version of the application in the footer
+desc: Easier to see what version is running on the live site.
+type: :feature
+component: tamanegi
+release: release-0.0.8
+reporter: Stoyan Zhekov <zh@zhware.net>
+status: :closed
+disposition: :fixed
+creation_time: 2008-04-16 07:12:44.710554 Z
+references: []
+
+id: 5951996fa9764370139a1417e237da5ecefaaa37
+log_events: 
+- - 2008-04-16 07:13:08.226215 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - created
+  - Hm, can this become a security problem?
+- - 2008-04-16 07:14:16.892309 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - closed issue with disposition fixed
+  - got the version from config.rb and show it in the layout.
