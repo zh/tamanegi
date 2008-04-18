@@ -4,7 +4,7 @@ xml.feed :xmlns=>'http://www.w3.org/2005/Atom' do
   xml.link    :rel=>"self", :href=>"#{Configuration.for('app').base_url}/atom", :type=>"application/atom+xml"
   xml.link    :rel=>"alternate", :href=>"#{Configuration.for('app').base_url}/", :type=>"text/html"
   xml.id      "#{Configuration.for('app').base_url}/"
-  xml.updated Time.now.iso8601
+  xml.updated Item.order(:id).last.created.iso8601
   xml.author  { xml.name 'Stoyan Zhekov' }
   @items.each do |i|
     xml.entry do
