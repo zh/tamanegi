@@ -1,0 +1,26 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: The 'updated' is alwais Time.now in the atom feed
+desc: |-
+  The updated tag was Time.now. So the feed readers cannot figure when the feed
+  is last changed. Change it to the time of the last item inserted in the DB.
+type: :bugfix
+component: tamanegi
+release: release-0.0.8
+reporter: Stoyan Zhekov <zh@zhware.net>
+status: :closed
+disposition: :fixed
+creation_time: 2008-04-18 13:41:15.806533 Z
+references: []
+
+id: 2db9c71a73f2e90fb44b69f32d75bee880c3bdc8
+log_events: 
+- - 2008-04-18 13:41:51.581243 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - created
+  - Fix as soon as possible. Affect the live service.
+- - 2008-04-18 13:42:49.431106 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - closed issue with disposition fixed
+  - |-
+    xml.updated Item.order(:id).last.created.iso8601
+    in view/atom.rxml
