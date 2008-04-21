@@ -7,6 +7,7 @@ require 'rubygems'
 require 'sequel'
 require 'validatable'
 require 'ramaze'
+require 'actionpack'
 
 DB_FILE = File.join(File.dirname(__FILE__),"db","tamanegi.db")
 DB = Sequel("sqlite:///#{DB_FILE}", :single_threaded => true)

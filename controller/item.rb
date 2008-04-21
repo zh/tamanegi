@@ -1,4 +1,4 @@
-require 'builder'
+require 'atom/pub'
 
 class ItemController < Ramaze::Controller
   map '/'
@@ -20,7 +20,23 @@ class ItemController < Ramaze::Controller
 
   # TODO: provide :atom, :json, :xml etc. helper
   def atom
-    @items = Item.order(:created.DESC).limit(Configuration.for('app').rss_page)
+    cfg = Configuration.for('app')
+    @items = Item.order(:created.DESC).limit(cfg.rss_page)
+    @feed  = Atom::Feed.new do |feed|
+      feed.title   = cfg.title
+      feed.id      = "#{cfg.base_url}/"
+      feed.updated = Item.order(:id).last.created.iso8601
+      feed.links  << Atom::Link.new(:rel=>"self", 
+                                   :href=>"#{cfg.base_url}/atom", 
+                                   :type=>"application/atom+xml")
+      feed.links  << Atom::Link.new(:rel => 'alternate', 
+                                   :href => "#{cfg.base_url}/")
+      
+      @items.each do |item|
+        feed.entries << item.to_atom
+      end
+    end
+    respond @feed.to_xml
   end
 
 private

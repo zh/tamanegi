@@ -2,4 +2,4 @@
 
 require 'tamanegi'
 
-Ramaze.start :adapter => :thin, :port => 7000, :load_engines => :Builder
+Ramaze.start :adapter => :thin, :port => 7000
