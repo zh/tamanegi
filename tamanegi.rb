@@ -7,7 +7,7 @@ require 'rubygems'
 require 'sequel'
 require 'validatable'
 require 'ramaze'
-require 'actionpack'
+require 'atom/pub'
 
 DB_FILE = File.join(File.dirname(__FILE__),"db","tamanegi.db")
 DB = Sequel("sqlite:///#{DB_FILE}", :single_threaded => true)
@@ -55,6 +55,25 @@ module Tamanegi
       puts "#{Time.now.iso8601} #{f.url} [#{status}]" if (status && debug)
     }
     Item.vacuum!
+  end
+
+  def self.to_atom
+    cfg = Configuration.for('app')
+    @items = Item.order(:created.DESC).limit(cfg.rss_page)
+    Atom::Feed.new do |feed|
+      feed.title   = cfg.title
+      feed.id      = "#{cfg.base_url}/"
+      feed.updated = Item.order(:id).last.created.iso8601
+      feed.links  << Atom::Link.new(:rel=>"self",
+                                   :href=>"#{cfg.base_url}/atom",
+                                   :type=>"application/atom+xml")
+      feed.links  << Atom::Link.new(:rel => 'alternate',
+                                   :href => "#{cfg.base_url}/")
+
+      @items.each do |item|
+        feed.entries << item.to_atom
+      end
+    end
   end
 end
 

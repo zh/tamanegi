@@ -1,0 +1,8 @@
+ditz release release-x.y.z
+ditz changelog release-x.y.z > tmp.txt
+cat CHANGELOG >> tmp.txt
+mv tmp.txt CHANGELOG
+git commit -a -v
+git tag -a tamanegi-x.y.z -m "Release x.y.z"
+git push
+git push --tags
