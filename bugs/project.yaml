@@ -31,3 +31,12 @@ releases:
     - Stoyan Zhekov <zh@zhware.net>
     - released
     - See the CHANGELOG for details.
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: release-0.0.9
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2008-04-22 05:09:36.654538 Z
+    - Stoyan Zhekov <zh@zhware.net>
+    - created
+    - Maybe will try to solve favicon.ico problem or stop supporting web frontend at all.

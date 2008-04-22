@@ -25,15 +25,13 @@ class Item < Sequel::Model(:items)
     set(:created => Time.now)
   end
 
-  def to_atom
-    cfg = Configuration.for('app')
+  def to_atom(base_url = Configuration.for('app').base_url)
     Atom::Entry.new do |e|
-      e.id         = "#{cfg.base_url}/show/#{self.id}"
+      e.id         = "#{base_url}/show/#{self.id}"
       e.title      = self.title
       e.updated    = self.created
       e.published  = self.created
-      # e.authors   << Atom::Person.new(:name => cfg.author.name)
-      e.links     << Atom::Link.new(:rel => 'alternative', :href => "#{cfg.base_url}/show/#{self.id}")
+      e.links     << Atom::Link.new(:rel => 'alternative', :href => "#{base_url}/show/#{self.id}")
       e.content    = Atom::Content::Html.new(self.description)
     end
   end

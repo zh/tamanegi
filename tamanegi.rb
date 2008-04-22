@@ -57,7 +57,7 @@ module Tamanegi
     Item.vacuum!
   end
 
-  def self.to_atom
+  def self.to_atom(base_url = Configuration.for('app').base_url)
     cfg = Configuration.for('app')
     @items = Item.order(:created.DESC).limit(cfg.rss_page)
     Atom::Feed.new do |feed|
@@ -65,13 +65,13 @@ module Tamanegi
       feed.id      = "#{cfg.base_url}/"
       feed.updated = Item.order(:id).last.created.iso8601
       feed.links  << Atom::Link.new(:rel=>"self",
-                                   :href=>"#{cfg.base_url}/atom",
+                                   :href=>"#{base_url}/atom",
                                    :type=>"application/atom+xml")
       feed.links  << Atom::Link.new(:rel => 'alternate',
-                                   :href => "#{cfg.base_url}/")
+                                   :href => "#{base_url}/")
 
       @items.each do |item|
-        feed.entries << item.to_atom
+        feed.entries << item.to_atom(base_url)
       end
     end
   end
