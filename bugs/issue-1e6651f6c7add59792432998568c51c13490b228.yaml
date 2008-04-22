@@ -20,10 +20,6 @@ log_events:
   - |-
     Item model have to_atom method. This will convert every item to atom format.
     Item controller have 'atom' method. It will construct the feed from the converted items.
-- - 2008-04-22 03:15:38.272693 Z
-  - Stoyan Zhekov <zh@zhware.net>
-  - changed description
-  - 
 - - 2008-04-22 03:16:38.348957 Z
   - Stoyan Zhekov <zh@zhware.net>
   - closed issue with disposition fixed
