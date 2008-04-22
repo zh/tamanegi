@@ -1,0 +1,30 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Replace xml builder with ratom for the atom feed
+desc: |-
+  Using ratom will remove the need from 'atom.rxml' template.
+  libxml2-dev need to be installed. Also ratom gem.
+type: :feature
+component: tamanegi
+release: release-0.0.8
+reporter: Stoyan Zhekov <zh@zhware.net>
+status: :closed
+disposition: :fixed
+creation_time: 2008-04-22 03:13:16.925676 Z
+references: []
+
+id: 1e6651f6c7add59792432998568c51c13490b228
+log_events: 
+- - 2008-04-22 03:14:53.761437 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - created
+  - |-
+    Item model have to_atom method. This will convert every item to atom format.
+    Item controller have 'atom' method. It will construct the feed from the converted items.
+- - 2008-04-22 03:15:38.272693 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - changed description
+  - 
+- - 2008-04-22 03:16:38.348957 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - closed issue with disposition fixed
+  - ratom branch merged with the master branch.

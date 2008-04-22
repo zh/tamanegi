@@ -1,5 +1,5 @@
 Configuration.for('app') {
-  version   '0.0.7'
+  version   '0.0.8'
   title     'Tamanegi - The state of the Onion'
   base_url  'http://localhost:7000'
   author {

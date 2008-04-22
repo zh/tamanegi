@@ -20,10 +20,14 @@ releases:
     - bugs tracking by ditz-0.2 (bugs/ dir).
 - !ditz.rubyforge.org,2008-03-06/release 
   name: release-0.0.8
-  status: :unreleased
-  release_time: 
+  status: :released
+  release_time: 2008-04-22 03:20:05.786722 Z
   log_events: 
   - - 2008-04-16 03:35:45.037454 Z
     - Stoyan Zhekov <zh@zhware.net>
     - created
     - Get ready for sequel-1.4 (eager loading)
+  - - 2008-04-22 03:20:05.786746 Z
+    - Stoyan Zhekov <zh@zhware.net>
+    - released
+    - See the CHANGELOG for details.

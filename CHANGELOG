@@ -1,5 +1,6 @@
-== release-0.0.8 / unreleased
+== release-0.0.8 / 2008-04-22
 * Show the version of the application in the footer
+* Replace xml builder with ratom for the atom feed
 * Remove old items from the database
 * bugfix: atom feed item links should point to the item show view
 * bugfix: sequel-1.4.0 have eager loading by default
