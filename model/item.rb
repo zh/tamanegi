@@ -1,3 +1,5 @@
+require 'atom/pub'
+
 class Item < Sequel::Model(:items)
   set_schema do
     primary_key :id
@@ -21,6 +23,19 @@ class Item < Sequel::Model(:items)
 
   after_create do
     set(:created => Time.now)
+  end
+
+  def to_atom
+    cfg = Configuration.for('app')
+    Atom::Entry.new do |e|
+      e.id         = self.link
+      e.title      = self.title
+      e.updated    = self.created
+      e.published  = self.created
+      # e.authors   << Atom::Person.new(:name => cfg.author.name)
+      e.links     << Atom::Link.new(:rel => 'alternative', :href => self.link)
+      e.content    = Atom::Content::Html.new(self.description)
+    end
   end
 
 end
