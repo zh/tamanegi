@@ -2,7 +2,6 @@ class FeedController < Ramaze::Controller
 
   map '/feed'
   layout :layout => [ :index, :new, :edit ]
-  layout '/layout' => [ :show ]
 
   helper :pager, :aspect, :auth
 
@@ -11,14 +10,6 @@ class FeedController < Ramaze::Controller
   def index
     @title = "Feeds"
     @feeds = Feed.order(:id.DESC)
-  end
-
-  def show(id)
-    @feed = feed_for(id)
-    @title = 'Feeds, ' + @feed.handle
-
-    @ids, @pager = paginate(@feed.items.map { |i| i.id },   
-                            :limit => Configuration.for('app').one_page)
   end
 
   def new
