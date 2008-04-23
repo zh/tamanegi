@@ -19,7 +19,8 @@
             <span class="pagetop">#{@page_title}</span>
           </td>
           <td style="text-align:right;padding-right:4px;">
-            <span class="pagetop"><a href="/feed/">admin</a></span>
+            <span class="pagetop"><a href="/feed/">admin</a> |
+            <a href="/bugs/">bugs</a> | <a href="#{Configuration.for('app').base_url}/atom">feed</a></span>
           </td>
         </tr>
         </table>
@@ -34,6 +35,11 @@
         </td>
       </tr> 
       </table>
+    <br/>
+    <br/>
+    <div id="footer">Powered by <a href="http://github.com/zh/tamanegi/tree/master/">Tamanegi</a>
+       v#{Configuration.for('app').version}
+    </div>
     </center>
   </body>
 </html>

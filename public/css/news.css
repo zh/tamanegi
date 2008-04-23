@@ -40,3 +40,6 @@ a:visited { color:#828282; text-decoration:none; }
 
 pre { overflow: hidden; padding: 2px; }
 pre:hover {overflow:auto} 
+
+#footer{ height:12px; padding: 5px; font-size:12px; text-align:center; }
+
