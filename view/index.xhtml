@@ -3,7 +3,7 @@
 <?r   i = Item[id] ?>
 <tr>
   <td align="right" valign="top" class="title">#{ord}.</td>
-  <td><a href="/show/#{id}">#{i.title}</a></td>
+  <td><a href="#{Rs(:show,url_encode(i.title))}">#{i.title}</a></td>
 </tr>
 <tr><td>&nbsp;</td>
 <td class="subtext">feed: #{i.feed.handle} , submitted: #{i.created.to_formatted_s(:short)}</td></tr>
