@@ -21,7 +21,8 @@ class Feed < Sequel::Model(:feeds)
     index [:synced]
   end 
 
-  one_to_many :items, :key => :feed_id, :order => :id.DESC
+  #one_to_many :items, :key => :feed_id, :order => :id.DESC
+  has_many :items
 
   include Validatable
 
@@ -33,11 +34,11 @@ class Feed < Sequel::Model(:feeds)
   end
 
   after_create do
-    set(:created => Time.now, :updated => Time.now)
+    update_values(:created => Time.now, :updated => Time.now)
   end
 
   after_update do
-    set(:updated => Time.now)
+    update_values(:updated => Time.now)
   end
 
   def self.add(handle, url)
@@ -64,7 +65,7 @@ class Feed < Sequel::Model(:feeds)
         @data = open(self.url, @opts) 
       end
     rescue OpenURI::HTTPError
-      set(:synced => Time.now, :status => 304)
+      update_values(:synced => Time.now, :status => 304)
       save if valid?
       return 304
     rescue Timeout::Error
@@ -78,12 +79,12 @@ class Feed < Sequel::Model(:feeds)
     end 
 
     # set the title, description and link ONLY IF EMPTY
-    set(:title => rss.channel.title.to_s) unless self.title
+    update_values(:title => rss.channel.title.to_s) unless self.title
     unless self.description
-      set(:description => rss.channel.description ? rss.channel.description.to_s : self.title)
+      update_values(:description => rss.channel.description ? rss.channel.description.to_s : self.title)
     end
     unless self.link
-      set(:link => rss.channel.urls.first) if rss.channel.urls
+      update_values(:link => rss.channel.urls.first) if rss.channel.urls
     end
 
     # add only the uniq items (uniq GUID)
@@ -91,7 +92,8 @@ class Feed < Sequel::Model(:feeds)
       DB.transaction do
         guid = guid_for(i)
         next if Item[:guid=>guid]
-        title = i.title.to_s
+        title = i.title.to_s.gsub(/<[a-zA-Z\/][^>]*>/,'')
+        p title
         item = Item.create(
           :title => title,
           :link => i.urls.first,
@@ -102,7 +104,7 @@ class Feed < Sequel::Model(:feeds)
         item.valid? ? item.save : rollback
       end
     end
-    set(:synced => Time.now, :status => @data.status[0].to_i, :etag => @data.meta['etag'])
+    update_values(:synced => Time.now, :status => @data.status[0].to_i, :etag => @data.meta['etag'])
     save if valid?
     return @data.status[0].to_i
   end

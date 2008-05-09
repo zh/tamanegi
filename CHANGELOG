@@ -1,3 +1,9 @@
+== release-0.0.9 / unreleased
+* Pass entry/feed base_url "on the fly"
+* bugfix: Object#DESC is depricated in Sequel
+* bugfix: HTML tags are unescaped in the item titles
+* bugfix: ratom-0.3.5 but still some feed validation problems
+
 == release-0.0.8 / 2008-04-22
 * Show the version of the application in the footer
 * Replace xml builder with ratom for the atom feed

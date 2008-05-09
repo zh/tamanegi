@@ -9,7 +9,7 @@ class FeedController < Ramaze::Controller
 
   def index
     @title = "Feeds"
-    @feeds = Feed.order(:id.DESC)
+    @feeds = Feed.order(:id.desc)
   end
 
   def new

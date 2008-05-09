@@ -1,5 +1,5 @@
 Configuration.for('app') {
-  version   '0.0.8'
+  version   '0.0.9beta'
   title     'Tamanegi - The state of the Onion'
   base_url  'http://localhost:7000'
   author {
@@ -9,4 +9,5 @@ Configuration.for('app') {
   rss_page  20
   giveup    10
   bootstrap true
+  cache_items false
 }

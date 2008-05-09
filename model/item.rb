@@ -1,4 +1,7 @@
 require 'atom/pub'
+require 'memcache'
+
+CACHE = MemCache.new 'localhost:11211', :namespace => 'tamanegi' if Configuration.for('app').cache_items
 
 class Item < Sequel::Model(:items)
   set_schema do
@@ -13,8 +16,11 @@ class Item < Sequel::Model(:items)
     index [:created]
   end
 
-  belongs_to :feed
+  set_cache CACHE, :ttl => 3600 if Configuration.for('app').cache_items
 
+  belongs_to :feed, :order => :id.desc
+
+  # created 30 days ago
   subset(:old_items) {:created < 30.days.ago}
 
   def self.vacuum!
@@ -22,12 +28,13 @@ class Item < Sequel::Model(:items)
   end
 
   after_create do
-    set(:created => Time.now)
+    update_values(:created => Time.now)
   end
 
   def to_atom(base_url = Configuration.for('app').base_url)
     Atom::Entry.new do |e|
-      e.id         = "#{Digest::SHA1.hexdigest(base_url)[0..16]}:#{self.id}"
+      e.id         = "urn:uuid:#{self.guid}"
+      e.authors   << Atom::Person.new(:name => self.feed.handle)
       e.title      = self.title
       e.updated    = self.created
       e.published  = self.created

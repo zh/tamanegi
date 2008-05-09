@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: HTML tags are unescaped in the item titles
+desc: |-
+  Found some italic tags in one of the entry titles. Need to escape (or remove)
+  the tags from the article titles.
+type: :bugfix
+component: tamanegi
+release: release-0.0.9
+reporter: Stoyan Zhekov <zh@zhware.net>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-09 04:31:08.972403 Z
+references: []
+
+id: bbe01bfabd61d7b61dd9c4e532c0767b947cb575
+log_events: 
+- - 2008-05-09 04:31:52.312040 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - created
+  - Better remove all tags. Only escaping can make them look ugly.
+- - 2008-05-09 06:55:34.966158 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - closed issue with disposition fixed
+  - title.gsub(/<[a-zA-Z\/][^>]*>/,'') in feed::sync!

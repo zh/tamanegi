@@ -5,12 +5,13 @@ require 'resolv-replace'
 
 require 'rubygems'
 require 'sequel'
+require 'assistance'
 require 'validatable'
 require 'ramaze'
 require 'atom/pub'
 
 DB_FILE = File.join(File.dirname(__FILE__),"db","tamanegi.db")
-DB = Sequel("sqlite:///#{DB_FILE}", :single_threaded => true)
+DB = Sequel.open("sqlite:///#{DB_FILE}", :single_threaded => true)
 
 acquire __DIR__/:lib/'*'
 Kernel.load 'config.rb'
@@ -59,11 +60,12 @@ module Tamanegi
 
   def self.to_atom(base_url = Configuration.for('app').base_url)
     cfg = Configuration.for('app')
-    @items = Item.order(:created.DESC).limit(cfg.rss_page)
+    @items = Item.order(:created.desc).limit(cfg.rss_page)
     Atom::Feed.new do |feed|
       feed.title   = cfg.title
-      feed.id      = "#{cfg.base_url}/"
+      feed.id      = "urn:uuid:"+Digest::SHA1.hexdigest("--#{cfg.base_url}--myBIGsecret")
       feed.updated = Item.order(:id).last.created.iso8601
+      feed.authors << Atom::Person.new(:name => 'Aggregated Feed')
       feed.links  << Atom::Link.new(:rel=>"self",
                                    :href=>"#{base_url}/atom",
                                    :type=>"application/atom+xml")

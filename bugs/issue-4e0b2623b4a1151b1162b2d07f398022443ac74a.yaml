@@ -1,0 +1,27 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: ratom-0.3.5 but still some feed validation problems
+desc: |-
+  - id must be a full and valid URL (entry)
+  - Missing entry element: author (entry)
+  - Feeds should not be served with the "text/html" media type
+type: :bugfix
+component: tamanegi
+release: release-0.0.9
+reporter: Stoyan Zhekov <zh@zhware.net>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-09 04:27:05.909516 Z
+references: []
+
+id: 4e0b2623b4a1151b1162b2d07f398022443ac74a
+log_events: 
+- - 2008-05-09 04:27:24.991421 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - created
+  - Can the media type be fixed with Rack middleware?
+- - 2008-05-09 07:20:59.553780 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - closed issue with disposition fixed
+  - |-
+    The ids for both feed and item changed to urn:uuid:{some unique value}.
+    Authors added to both feed and entries.

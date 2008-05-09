@@ -6,7 +6,7 @@ class ItemController < Ramaze::Controller
 
   def index
     @title = "The state of the onion"
-    @ids, @pager = paginate(Item.order(:id.DESC).map(:id), 
+    @ids, @pager = paginate(Item.order(:id.desc).map(:id), 
                             :limit => Configuration.for('app').one_page)
   end
 
