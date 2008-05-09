@@ -63,7 +63,7 @@ module Tamanegi
     @items = Item.order(:created.desc).limit(cfg.rss_page)
     Atom::Feed.new do |feed|
       feed.title   = cfg.title
-      feed.id      = "urn:uuid:"+Digest::SHA1.hexdigest("--#{cfg.base_url}--myBIGsecret")
+      feed.id      = "urn:uuid:"+Digest::SHA1.hexdigest("--#{base_url}--myBIGsecret")
       feed.updated = Item.order(:id).last.created.iso8601
       feed.authors << Atom::Person.new(:name => 'Aggregated Feed')
       feed.links  << Atom::Link.new(:rel=>"self",
