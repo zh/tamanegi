@@ -1,8 +1,9 @@
 <?r @page_title = @title ? @title : Configuration.for('app').title ?>
 <html>
   <head>
-    <link href="#{Configuration.for('app').base_url}/atom" rel="alternate" type="application/atom+xml" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>#{@page_title}</title>
+    <link href="#{Configuration.for('app').base_url}/atom" rel="alternate" type="application/atom+xml" />
     <link href='/css/news.css' rel='stylesheet' type='text/css' />
   </head>
   <body>
