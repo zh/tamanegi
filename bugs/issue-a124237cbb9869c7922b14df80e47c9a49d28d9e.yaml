@@ -5,8 +5,8 @@ type: :bugfix
 component: tamanegi
 release: 
 reporter: Stoyan Zhekov <zh@zhware.net>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-04-16 04:33:46.938826 Z
 references: []
 
@@ -22,3 +22,7 @@ log_events:
   - Stoyan Zhekov <zh@zhware.net>
   - changed description
   - ""
+- - 2008-05-13 01:51:30.368102 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - closed issue with disposition fixed
+  - There is no more favicon.ico fetching in the new arcstyle view.
