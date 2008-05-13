@@ -33,10 +33,14 @@ releases:
     - See the CHANGELOG for details.
 - !ditz.rubyforge.org,2008-03-06/release 
   name: release-0.0.9
-  status: :unreleased
-  release_time: 
+  status: :released
+  release_time: 2008-05-13 01:35:29.822392 Z
   log_events: 
   - - 2008-04-22 05:09:36.654538 Z
     - Stoyan Zhekov <zh@zhware.net>
     - created
     - Maybe will try to solve favicon.ico problem or stop supporting web frontend at all.
+  - - 2008-05-13 01:35:29.822392 Z
+    - Stoyan Zhekov <zh@zhware.net>
+    - released
+    - Mostly bugfixes. arcstyle merged to the master branch.
