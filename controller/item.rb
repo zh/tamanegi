@@ -19,7 +19,7 @@ class ItemController < Ramaze::Controller
   def atom
     response['Content-Type'] = 'application/atom+xml'
     response['Cache-Control'] = 'max-age=900, public'
-    response['Expires'] => (Time.now + 900).utc.rfc2822
+    response['Expires'] = (Time.now + 900).utc.rfc2822
     respond Tamanegi::to_atom.to_xml
   end
 
