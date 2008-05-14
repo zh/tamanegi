@@ -39,7 +39,7 @@ class Item < Sequel::Model(:items)
       e.updated    = self.created
       e.published  = self.created
       e.links     << Atom::Link.new(:rel => 'alternate', 
-                                    :href => "#{base_url}/show/#{url_encode(self.title)}")
+                                    :href => "#{base_url}/show/#{self.title.uri_escape}")
       e.content    = Atom::Content::Html.new(self.description)
     end
   end

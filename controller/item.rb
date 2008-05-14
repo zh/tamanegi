@@ -2,7 +2,7 @@ class ItemController < Ramaze::Controller
   map '/'
   layout :layout
   deny_layout :atom
-  helper :pager, :cgi
+  helper :pager
 
   def index
     @title = "The state of the onion"
@@ -11,7 +11,7 @@ class ItemController < Ramaze::Controller
   end
 
   def show title
-    redirect Rs() unless @item = Item[:title => url_decode(title)]
+    redirect Rs() unless @item = Item[:title => title.uri_unescape]
     @title = @item.title
   end
 

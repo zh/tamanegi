@@ -93,7 +93,6 @@ class Feed < Sequel::Model(:feeds)
         guid = guid_for(i)
         next if Item[:guid=>guid]
         title = i.title.to_s.gsub(/<[a-zA-Z\/][^>]*>/,'')
-        p title
         item = Item.create(
           :title => title,
           :link => i.urls.first,
