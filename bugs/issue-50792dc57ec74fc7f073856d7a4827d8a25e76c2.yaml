@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Replace slow ::CGI::encode and decode
+desc: |-
+  Camping have faster functions for URI escape/unescape.
+  Most of the recent frameworks using them insteed of the slow ::CGI funcs.
+type: :bugfix
+component: tamanegi
+release: release-0.0.10
+reporter: Stoyan Zhekov <zh@zhware.net>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-14 03:43:49.720358 Z
+references: []
+
+id: 50792dc57ec74fc7f073856d7a4827d8a25e76c2
+log_events: 
+- - 2008-05-14 03:44:09.050787 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - created
+  - Extend the String class.
+- - 2008-05-14 03:45:07.493281 Z
+  - Stoyan Zhekov <zh@zhware.net>
+  - closed issue with disposition fixed
+  - model/core_ext.rb have String::uri_escape and String::uri_unescape.

@@ -44,3 +44,12 @@ releases:
     - Stoyan Zhekov <zh@zhware.net>
     - released
     - Mostly bugfixes. arcstyle merged to the master branch.
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: release-0.0.10
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2008-05-14 03:41:57.517904 Z
+    - Stoyan Zhekov <zh@zhware.net>
+    - created
+    - Will try to keep it just bugfix release, no new features planed.
