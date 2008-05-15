@@ -17,6 +17,6 @@ Ramaze.trait[:essentials].delete Ramaze::Adapter
 #Ramaze::Log.loggers.first.log_levels = [:error, :info, :warn]
 Ramaze::Log.loggers = []
 Ramaze::Global.sourcereload = nil
-use ProcTitle
+#use ProcTitle
 Ramaze.start :force => true, :load_engines => :Builder, :cache_alternative => {:sessions => Ramaze::MemcachedCache}
 run Ramaze::Adapter::Base
