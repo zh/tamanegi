@@ -3,7 +3,7 @@ Configuration.for('app') {
   title     'Tamanegi - The state of the Onion'
   base_url  'http://localhost:7000'
   author {
-    name 'Stoyan Zhekov'
+    name 'Aggregated Feed'
   }
   one_page  20
   rss_page  20
