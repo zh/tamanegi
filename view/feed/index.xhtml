@@ -3,8 +3,8 @@
 <table width="100%" border="0">
 <?r @feeds.each do |f|  ?>
 <tr>
-<td><a href="#{f.url}"><img border="0" src="#{f.link}/favicon.ico" width="16" height="16" /></a>
-    <a href="/feed/#{f.id}">#{f.handle}</a></td>
+<td><a href="#{f.link}"><img border="0" src="#{f.link}/favicon.ico" width="16" height="16" /></a>
+    <a href="#{f.url}">#{f.handle}</a></td>
 <td>#{f.synced.to_formatted_s(:db)}</td>
 <?r if f.status == 200 || f.status == 304 ?>
 <td>#{f.status}</td>

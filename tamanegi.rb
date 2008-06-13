@@ -5,13 +5,12 @@ require 'resolv-replace'
 
 require 'rubygems'
 require 'sequel'
-require 'assistance'
 require 'validatable'
 require 'ramaze'
 require 'atom/pub'
 
-DB_FILE = File.join(File.dirname(__FILE__),"db","tamanegi.db")
-DB = Sequel.open("sqlite:///#{DB_FILE}", :single_threaded => true)
+DB_FILE = __DIR__/'db/tamanegi.db'
+DB = Sequel.connect("sqlite://#{DB_FILE}")
 
 acquire __DIR__/:lib/'*'
 Kernel.load 'config.rb'

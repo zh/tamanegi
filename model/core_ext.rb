@@ -30,6 +30,36 @@ class Time#:nodoc:
   end
 end
 
+class Numeric
+  MINUTE = 60
+  HOUR = 3600
+  DAY = 86400
+  WEEK = DAY * 7
+  MONTH = WEEK * 4
+  YEAR = MONTH * 12
+
+  # Converts self from minutes to seconds
+  def minutes;  self * MINUTE;  end; alias_method :minute, :minutes
+  # Converts self from hours to seconds
+  def hours;    self * HOUR;    end; alias_method :hour, :hours
+  # Converts self from days to seconds
+  def days;     self * DAY;     end; alias_method :day, :days
+  # Converts self from weeks to seconds
+  def weeks;    self * WEEK;    end; alias_method :week, :weeks
+  # Converts self from months to seconds
+  def months;   self * MONTH;   end; alias_method :month, :months
+  # Converts self from years to seconds
+  def years;    self * YEAR;    end; alias_method :year, :years
+
+  # Returns the time at now - self.
+  def ago(t = Time.now); t - self; end
+  alias_method :before, :ago
+
+  # Returns the time at now + self.
+  def from_now(t = Time.now); t + self; end
+  alias_method :since, :from_now
+end unless defined? Numeric::MINUTE
+
 module Sequel#:nodoc:
   class Model
     def to_json
