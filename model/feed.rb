@@ -1,4 +1,10 @@
-require 'timeout'
+begin
+  require 'system_timer'
+  MyTimer = SystemTimer
+rescue LoadError
+  require 'timeout'
+  MyTimer = Timeout
+end
 require 'open-uri'
 require 'feed-normalizer'
 
@@ -56,7 +62,7 @@ class Feed < Sequel::Model(:feeds)
   #
   def sync!(forceUpdate = false, giveup = Configuration.for('app').giveup)
     begin
-      Timeout::timeout(giveup) do
+      MyTimer.timeout(giveup) do
         @opts = {}
         unless forceUpdate
           @opts = @opts.merge({'If-Modified-Since' => self.synced.to_formatted_s(:rfc822)}) if self.synced

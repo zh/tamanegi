@@ -9,6 +9,8 @@ require 'validatable'
 require 'ramaze'
 require 'atom/pub'
 
+Sequel.use_parse_tree = false
+
 DB_FILE = __DIR__/'db/tamanegi.db'
 DB = Sequel.connect("sqlite://#{DB_FILE}")
 
