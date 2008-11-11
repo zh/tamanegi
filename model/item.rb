@@ -20,11 +20,8 @@ class Item < Sequel::Model(:items)
 
   belongs_to :feed, :order => :id.desc
 
-  # created 30 days ago
-  subset(:old_items) {:created < 30.days.ago}
-
   def self.vacuum!
-    old_items.delete
+    Item.filter(:created < 30.days.ago).delete
   end
 
   after_create do
