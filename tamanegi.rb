@@ -59,6 +59,7 @@ module Tamanegi
     Item.vacuum!
   end
 
+  # Go to http://friendfeed.com/api/public-sup to get a SUP-ID
   def self.to_atom(base_url = Configuration.for('app').base_url)
     cfg = Configuration.for('app')
     @items = Item.order(:created.desc).limit(cfg.rss_page)
@@ -67,11 +68,15 @@ module Tamanegi
       feed.id      = "urn:uuid:"+Digest::SHA1.hexdigest("--#{base_url}--myBIGsecret")
       feed.updated = Item.order(:id).last.created.iso8601
       feed.authors << Atom::Person.new(:name => 'Aggregated Feed')
-      feed.links  << Atom::Link.new(:rel=>"self",
-                                   :href=>"#{base_url}/atom",
-                                   :type=>"application/atom+xml")
+      feed.links  << Atom::Link.new(:rel => "self",
+                       :href => "#{base_url}/atom",
+                       :type => "application/atom+xml")
+      feed.links  << Atom::Link.new(:rel => "http://api.friendfeed.com/2008/03#sup",
+                       :href => "http://friendfeed.com/api/public-sup.json##{cfg.sup_id}",
+                       :xmlns => "http://www.w3.org/2005/Atom",
+                       :type => "application/json")
       feed.links  << Atom::Link.new(:rel => 'alternate',
-                                   :href => "#{base_url}/")
+                       :href => "#{base_url}/")
 
       @items.each do |item|
         feed.entries << item.to_atom(base_url)

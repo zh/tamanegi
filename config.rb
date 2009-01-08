@@ -10,4 +10,5 @@ Configuration.for('app') {
   giveup    10
   bootstrap true
   cache_items false
+  sup_id    'change__me'
 }

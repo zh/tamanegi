@@ -17,9 +17,11 @@ class ItemController < Ramaze::Controller
 
   # cached for 15 minutes
   def atom
+    sup_id = Configuration.for('app').sup_id
     response['Content-Type'] = 'application/atom+xml'
     response['Cache-Control'] = 'max-age=900, public'
     response['Expires'] = (Time.now + 900).utc.rfc2822
+    response['X-SUP-ID'] = "http://friendfeed.com/api/public-sup.json##{sup_id}"
     respond Tamanegi::to_atom.to_xml
   end
 
